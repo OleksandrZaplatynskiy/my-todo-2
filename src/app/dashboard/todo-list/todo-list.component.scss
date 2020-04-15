@@ -1,0 +1,23 @@
+.todo-priority {
+    height: 16px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+.priority-label-1 {
+    background-color: green;
+    color: #fff;
+}
+.priority-label-2 {
+    background-color: yellow;
+}
+.priority-label-3 {
+    background-color: red;
+    color: #fff;
+}
+
+.todo-name {
+    font-size: 18px;
+    margin: 0 10px;
+    white-space: nowrap;
+}

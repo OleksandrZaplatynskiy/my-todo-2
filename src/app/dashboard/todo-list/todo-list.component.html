@@ -1,7 +1,10 @@
 <div class="mt-4">
-    <div *ngFor="let todo of todos" class="d-flex justify-content-between mb-3">
-        <p (click)="updateStateTodo(todo)">{{todo.name}} {{todo.priority}} {{todo.complete}}</p>
+    <div *ngFor="let todo of todos" class="d-flex align-items-center justify-content-between mb-3">
+        <label class="d-flex align-items-center">
+            <input type="checkbox" [checked]="todo.complete" (change)="updateStateTodo(todo)">
+            <p class="todo-name">{{todo.name}}</p>
+            <div class="todo-priority" [ngClass]="'priority-label-'+todo.priority">{{labelPriority[todo.priority]}}</div>
+        </label>
         <button class="btn btn-danger" (click)="removeTodo(todo.id)">Delete</button>
     </div>
 </div>
-

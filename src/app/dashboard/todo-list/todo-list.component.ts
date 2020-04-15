@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Priority } from '../todo.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,18 +11,21 @@ import { TodoService } from '../todo.service';
 export class TodoListComponent implements OnInit {
 
   subscription;
-
+  labelPriority = Priority;
   todos;
 
   constructor(
-    private todoService: TodoService
+    private todoService: TodoService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.todoService.getAllTodos().subscribe(res => {
-      this.todos = res;
-      console.log(res);
-    });
+    this.authService.user$.subscribe(user => {
+      this.subscription = this.todoService.getAllTodos(user.uid).subscribe(res => {
+        this.todos = res;
+        console.log(res);
+      });
+    })
   }
 
   removeTodo(id) {

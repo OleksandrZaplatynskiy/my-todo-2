@@ -23,8 +23,8 @@ export class TodoService {
     return this.afs.collection<Todo>('todos').doc(id).set(todo);
   }
 
-  getAllTodos() {
-    return this.afs.collection<Todo>('todos').snapshotChanges().pipe(
+  getAllTodos(uid) {
+    return this.afs.collection<Todo>('todos', ref => ref.where('authorId', '==', uid)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Todo;
         const id = a.payload.doc.id;
